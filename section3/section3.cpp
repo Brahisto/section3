@@ -1,15 +1,7 @@
 ﻿#include "head.h"
 
 int main() {
-	Complex num1{ 1., 2. };
-	Complex num2{ 3., 2. };
-	Complex num3{0., 0.};
-	num3 = num1 + num2;
-	num3.show();
-	num3 = num1 - num2;
-	num3.show();
-	num3 = num1 * num2;
-	num3.show();
+	
 
 	GenDataBits bits{ 10 };
 	bits.setValue();

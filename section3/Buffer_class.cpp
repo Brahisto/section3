@@ -1,8 +1,15 @@
 #include "head.h"
 
 Buffer::Buffer(int len) {
-	pBuffer = new float[len];
-	len_buf = len;
+	if (len > 0) {
+		pBuffer = new float[len];
+		len_buf = len;
+	}
+	else {
+		pBuffer = nullptr;
+		len_buf = 0;
+	}
+	
 }
 Buffer::~Buffer() {
 	delete[] pBuffer;

@@ -20,7 +20,7 @@ void FIRFilter::setVal(float value, int pos) {
 	}
 	else std::cout << "error.out of range\n";
 }
-void FIRFilter::cyclic_convolution(float* input, int len_sig, float* output) {
+/*void FIRFilter::cyclic_convolution(float* input, int len_sig, float* output) {
 	if (len_sig > len_) {
 		int d = len_sig - len_;
 		app_buf(len_sig - len_);
@@ -48,8 +48,8 @@ void FIRFilter::cyclic_convolution(float* input, int len_sig, float* output) {
 		}
 	}
 }
-
-void FIRFilter::app_buf(int n) {
+*/
+/*void FIRFilter::app_buf(int n) {
 	float* new_ptr = new float[len_ + n];
 	if (n > 0) {
 		for (int i{}; i < len_; i++) {
@@ -65,4 +65,15 @@ void FIRFilter::app_buf(int n) {
 	buffer_ = new_ptr;
 
 	len_ += n;
+}*/
+
+void FIRFilter::conv(float* input, int lenA, float * output) {
+	for (int i{}; i < lenA; i++) {
+		for (int j{}; j < len_; j++) {
+			if (i + j < lenA) {
+				*(output + i + j) += (*(input + i)) * (*(buffer_ + j));
+			}
+			
+		}
+	}
 }

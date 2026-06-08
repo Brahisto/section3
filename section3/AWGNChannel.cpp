@@ -11,7 +11,7 @@ void AWGNChannel::gen_val() {
 		P_sig += pow(*(input_signal + i), 2);
 	}
 	P_sig /= len_;
-	float P_n = P_sig * pow(10., SNR_ / 10);
+	float P_n = P_sig / pow(10., SNR_ / 10);
 	float stddev = sqrt(P_n);
 	std::random_device rd;
 	std::mt19937 gen(rd());

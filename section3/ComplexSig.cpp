@@ -1,12 +1,13 @@
 #include "head.h"
 
-ComplexGenerator::ComplexGenerator(int n) {
+ComplexGenerator::ComplexGenerator(int n, float f) {
 	if (n > 0) {
 		len_ = n;
 		real_sig = new float[n];
 		imag_sig = new float[n];
 		real_noise = new float[n];
 		imag_noise = new float[n];
+		freq = f;
 	}
 	else {
 		real_sig = nullptr;
@@ -36,23 +37,19 @@ void ComplexGenerator::show(int k = 0) {
 	}
 }
 void ComplexGenerator::init_sig() {
-	mt19937 gen_r(1.2);
-	uniform_real_distribution<float> dist_r(-PI / 2, PI / 2.);
-
-	mt19937 gen_i(1.8);
-	uniform_real_distribution<float> dist_i(-PI / 2., PI / 2.);
+	float dT = 0.01;
 	for (int i{}; i < len_; i++) {
-		*(real_sig + i) = cos(dist_r(gen_r));
-		*(imag_sig + i) = sin(dist_i(gen_i));
+		*(real_sig + i) = cos(2*PI * freq *i*dT);
+		*(imag_sig + i) = sin(2*PI*freq*i*dT);
 	}
 }
 
 void ComplexGenerator::init_noise() {
 	mt19937 gen_r(-1.2);
-	normal_distribution<float> dist_r(-2., 2.);
+	normal_distribution<float> dist_r(0);
 
 	mt19937 gen_i(1.5);
-	normal_distribution<float> dist_i(-2., 2.);
+	normal_distribution<float> dist_i(0);
 	for (int i{}; i < len_; i++) {
 		*(real_noise + i) = dist_r(gen_r);
 		*(imag_noise + i) = dist_i(gen_i);

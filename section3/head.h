@@ -112,8 +112,9 @@ public:
 	FIRFilter(int);
 	~FIRFilter();
 	void setVal(float, int);
-	void cyclic_convolution(float*, int len_sig, float*);
-	void app_buf(int);
+	//void cyclic_convolution(float*, int len_sig, float*);
+	//void app_buf(int);
+	void conv(float*,int, float*);
 };
 
 class RingBuffer {
@@ -153,8 +154,9 @@ class ComplexGenerator {
 	float* real_noise;
 	float* imag_noise;
 	int len_;
+	float freq;
 public:
-	ComplexGenerator(int);
+	ComplexGenerator(int, float);
 	~ComplexGenerator();
 	void show(int);
 	void init_sig();
